@@ -1,5 +1,3 @@
-import 'package:test_smile/Models/CustomerInfo.dart';
-
 class ListData {
   List<String> customerName = [];
   List<int> customerAmount = [];
@@ -7,7 +5,6 @@ class ListData {
   List<String> customertier = [];
   List<String> customerphone = [];
   List<int> totaltransaction = [];
-
   List<int> totalreward = [];
   List<int> remainingpoint = [];
   List<String> summaryTier = [];

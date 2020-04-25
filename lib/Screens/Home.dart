@@ -1,8 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:test_smile/Models/CustomerInfo.dart';
 import 'DayView.dart' as _DayView;
 import 'MonthView.dart' as _MonthView;
 import 'QuarterView.dart' as _QuarterView;

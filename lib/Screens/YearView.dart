@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
 import 'package:test_smile/Models/CustomerInfo.dart';
 import 'package:test_smile/Models/ListData.dart';

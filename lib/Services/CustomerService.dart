@@ -15,7 +15,6 @@ Future<ListData> getCustomerInfoDaily() async {
   List<int> remainingpoint = [];
   ListData listCustomer = new ListData();
   List<String> summaryTier = [];
-
   await http
       .get(
           "https://wegivmerchantapp.firebaseapp.com/exam/bi-member-day-2020-04-01.json")
@@ -58,6 +57,7 @@ Future<ListData> getCustomerInfoDaily() async {
       totaltransaction: totaltransaction,
       sumAmount: sumAmount,
       summaryTier: summaryTier);
+
   return listCustomer;
 }
 
@@ -92,24 +92,20 @@ Future<ListData> getCustomerInfoMonth() async {
           remainingpoint.add(msgCustomer.data.list[i].remainingpoint);
         }
       }
+
       for (var i = 0; i < msgCustomer.data.summarytier.length; i++) {
         if (summaryTier.indexOf(msgCustomer.data.summarytier[i].tierName) ==
             -1) {
           summaryTier.add(msgCustomer.data.summarytier[i].tierName);
         }
       }
+
       for (var i = 0; i < customerAmount.length; i++) {
         sumAmount += customerAmount[i];
       }
     }
   });
-  print(customerName.length);
-  print(customerAmount.length);
-  print(customertier.length);
-  print(customerphone.length);
-  print(totalreward.length);
-  print(totaltransaction.length);
-  print(remainingpoint.length);
+
   listCustomer = new ListData(
       customerName: customerName,
       customerAmount: customerAmount,
@@ -120,6 +116,7 @@ Future<ListData> getCustomerInfoMonth() async {
       totaltransaction: totaltransaction,
       sumAmount: sumAmount,
       summaryTier: summaryTier);
+
   return listCustomer;
 }
 
@@ -144,6 +141,7 @@ Future<ListData> getCustomerInfoQuarter() async {
     if (response.statusCode == 200) {
       Map map = json.decode(response.body);
       msgCustomer = CustomerInfo.fromJson(map);
+
       for (var i = 0; i < msgCustomer.data.list.length; i++) {
         if (customerName.indexOf(msgCustomer.data.list[i].customername) == -1) {
           customerName.add(msgCustomer.data.list[i].customername);
@@ -155,12 +153,14 @@ Future<ListData> getCustomerInfoQuarter() async {
           remainingpoint.add(msgCustomer.data.list[i].remainingpoint);
         }
       }
+
       for (var i = 0; i < msgCustomer.data.summarytier.length; i++) {
         if (summaryTier.indexOf(msgCustomer.data.summarytier[i].tierName) ==
             -1) {
           summaryTier.add(msgCustomer.data.summarytier[i].tierName);
         }
       }
+
       for (var i = 0; i < customerAmount.length; i++) {
         sumAmount += customerAmount[i];
       }
@@ -177,6 +177,7 @@ Future<ListData> getCustomerInfoQuarter() async {
       totaltransaction: totaltransaction,
       sumAmount: sumAmount,
       summaryTier: summaryTier);
+
   return listCustomer;
 }
 
@@ -200,6 +201,7 @@ Future<ListData> getCustomerInfoYear() async {
     if (response.statusCode == 200) {
       Map map = json.decode(response.body);
       msgCustomer = CustomerInfo.fromJson(map);
+
       for (var i = 0; i < msgCustomer.data.list.length; i++) {
         if (customerName.indexOf(msgCustomer.data.list[i].customername) == -1) {
           customerName.add(msgCustomer.data.list[i].customername);
@@ -211,24 +213,20 @@ Future<ListData> getCustomerInfoYear() async {
           remainingpoint.add(msgCustomer.data.list[i].remainingpoint);
         }
       }
+
       for (var i = 0; i < msgCustomer.data.summarytier.length; i++) {
         if (summaryTier.indexOf(msgCustomer.data.summarytier[i].tierName) ==
             -1) {
           summaryTier.add(msgCustomer.data.summarytier[i].tierName);
         }
       }
+
       for (var i = 0; i < customerAmount.length; i++) {
         sumAmount += customerAmount[i];
       }
     }
   });
-  print(customerName.length);
-  print(customerAmount.length);
-  print(customertier.length);
-  print(customerphone.length);
-  print(totalreward.length);
-  print(totaltransaction.length);
-  print(remainingpoint.length);
+
   listCustomer = new ListData(
       customerName: customerName,
       customerAmount: customerAmount,
@@ -239,5 +237,6 @@ Future<ListData> getCustomerInfoYear() async {
       totaltransaction: totaltransaction,
       sumAmount: sumAmount,
       summaryTier: summaryTier);
+
   return listCustomer;
 }
