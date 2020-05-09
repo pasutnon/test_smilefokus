@@ -12,7 +12,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: Home(),
+      home: Home(
+        index: 0,
+      ),
+      routes: <String, WidgetBuilder>{
+        '/homepage': (BuildContext context) => new Home(index: 0),
+        '/monthView': (BuildContext context) => new Home(index: 1),
+        '/quarterView': (BuildContext context) => new Home(index: 2),
+        '/yearView': (BuildContext context) => new Home(index: 3),
+      },
     );
   }
 }
