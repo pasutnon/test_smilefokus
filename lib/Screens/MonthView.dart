@@ -26,7 +26,6 @@ class _MonthViewState extends State<MonthView> {
   int sumTransaction = 0;
   int sumRemaining = 0;
   String isSelect = "Month View";
-
   @override
   void initState() {
     fetchData();
@@ -56,9 +55,7 @@ class _MonthViewState extends State<MonthView> {
       for (var i = 0; i < listCustomer.totalreward.length; i++) {
         sumTotalReward += listCustomer.totalreward[i];
       }
-      for (var i = 0; i < listCustomer.customerAmount.length; i++) {
-        sumLTV += listCustomer.customerAmount[i];
-      }
+
       for (var i = 0; i < listCustomer.totaltransaction.length; i++) {
         sumTransaction += listCustomer.totaltransaction[i];
       }
@@ -69,7 +66,7 @@ class _MonthViewState extends State<MonthView> {
       print(sumLTV);
       print(sumTransaction);
       listCustomer.customerName.add("Total");
-      listCustomer.customerAmount.add(sumLTV);
+      listCustomer.customerAmount.add(listCustomer.sumAmount);
       listCustomer.customerphone.add(" ");
       listCustomer.customertier.add(" ");
       listCustomer.remainingpoint.add(sumRemaining);
@@ -139,6 +136,16 @@ class _MonthViewState extends State<MonthView> {
                               color: Colors.white)),
                     ],
                   ),
+                if (listCustomer.summaryTier.length == 0)
+                  Row(
+                    children: <Widget>[
+                      Text("",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ],
+                  ),
                 Text(
                     "Total Members: " +
                         (listCustomer.customerName.length - 1).toString(),
@@ -171,11 +178,10 @@ class _MonthViewState extends State<MonthView> {
             value: isSelect,
             elevation: 8,
             style: TextStyle(
-              color: Colors.black,
               fontSize: 16,
             ),
             underline: Container(
-              height: 5,
+              height: 20,
             ),
             onChanged: (String newValue) {
               print(newValue);

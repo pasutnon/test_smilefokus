@@ -26,7 +26,6 @@ class _YearViewState extends State<YearView> {
   int sumTransaction = 0;
   int sumRemaining = 0;
   String isSelect = "Year View";
-
   @override
   void initState() {
     fetchData();
@@ -56,9 +55,7 @@ class _YearViewState extends State<YearView> {
       for (var i = 0; i < listCustomer.totalreward.length; i++) {
         sumTotalReward += listCustomer.totalreward[i];
       }
-      for (var i = 0; i < listCustomer.customerAmount.length; i++) {
-        sumLTV += listCustomer.customerAmount[i];
-      }
+
       for (var i = 0; i < listCustomer.totaltransaction.length; i++) {
         sumTransaction += listCustomer.totaltransaction[i];
       }
@@ -69,7 +66,7 @@ class _YearViewState extends State<YearView> {
       print(sumLTV);
       print(sumTransaction);
       listCustomer.customerName.add("Total");
-      listCustomer.customerAmount.add(sumLTV);
+      listCustomer.customerAmount.add(listCustomer.sumAmount);
       listCustomer.customerphone.add(" ");
       listCustomer.customertier.add(" ");
       listCustomer.remainingpoint.add(sumRemaining);
@@ -125,14 +122,24 @@ class _YearViewState extends State<YearView> {
             margin: EdgeInsets.all(0),
             color: Colors.grey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 if (listCustomer.summaryTier.length != 0)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(listCustomer.summaryTier[0],
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ],
+                  ),
+                if (listCustomer.summaryTier.length == 0)
+                  Row(
+                    children: <Widget>[
+                      Text("",
                           style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
@@ -171,11 +178,10 @@ class _YearViewState extends State<YearView> {
             value: isSelect,
             elevation: 8,
             style: TextStyle(
-              color: Colors.black,
               fontSize: 16,
             ),
             underline: Container(
-              height: 5,
+              height: 20,
             ),
             onChanged: (String newValue) {
               print(newValue);
@@ -218,10 +224,7 @@ class _YearViewState extends State<YearView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      value,
-                      style: TextStyle(color: Colors.orange),
-                    )
+                    Text(value, style: TextStyle(color: Colors.orange))
                   ],
                 ),
               );

@@ -20,7 +20,6 @@ class _DayViewState extends State<DayView> {
   static List<int> totalreward = [];
   static List<int> remainingpoint = [];
   static List<String> summaryTier = [];
-  String isSelected = "Day View";
   ListData listCustomer;
   int sumTotalReward = 0;
   int sumLTV = 0;
@@ -56,9 +55,7 @@ class _DayViewState extends State<DayView> {
       for (var i = 0; i < listCustomer.totalreward.length; i++) {
         sumTotalReward += listCustomer.totalreward[i];
       }
-      for (var i = 0; i < listCustomer.customerAmount.length; i++) {
-        sumLTV += listCustomer.customerAmount[i];
-      }
+
       for (var i = 0; i < listCustomer.totaltransaction.length; i++) {
         sumTransaction += listCustomer.totaltransaction[i];
       }
@@ -69,7 +66,7 @@ class _DayViewState extends State<DayView> {
       print(sumLTV);
       print(sumTransaction);
       listCustomer.customerName.add("Total");
-      listCustomer.customerAmount.add(sumLTV);
+      listCustomer.customerAmount.add(listCustomer.sumAmount);
       listCustomer.customerphone.add(" ");
       listCustomer.customertier.add(" ");
       listCustomer.remainingpoint.add(sumRemaining);
