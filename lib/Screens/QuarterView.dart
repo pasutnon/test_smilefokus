@@ -169,63 +169,85 @@ class _QuarterViewState extends State<QuarterView> {
         shrinkWrap: true,
         padding: EdgeInsets.all(0),
         children: <Widget>[
-          DropdownButton<String>(
-            hint: Text('Quarter View'),
-            isExpanded: true,
-            value: isSelect,
-            elevation: 8,
-            style: TextStyle(
-              fontSize: 16,
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.all(8.0),
+            width: 156,
+            height: 30,
+            decoration: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                    width: 1.0, style: BorderStyle.solid, color: Colors.orange),
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+              ),
             ),
-            underline: Container(
-              height: 20,
+            child: DropdownButton<String>(
+              hint: Text('Quarter View'),
+              value: isSelect,
+              style: TextStyle(
+                fontSize: 16,
+              ),
+              underline: Container(
+                height: 0,
+              ),
+              onChanged: (String newValue) {
+                switch (newValue) {
+                  case "Day View":
+                    {
+                      Navigator.of(context).pushReplacementNamed("/homepage");
+                    }
+                    break;
+                  case "Month View":
+                    {
+                      Navigator.of(context).pushReplacementNamed("/monthView");
+                    }
+                    break;
+
+                  case "Quarter View":
+                    {
+                      Navigator.of(context)
+                          .pushReplacementNamed("/quarterView");
+                    }
+                    break;
+
+                  case "Year View":
+                    {
+                      Navigator.of(context).pushReplacementNamed("/yearView");
+                    }
+                    break;
+                }
+                setState(() {
+                  isSelect = newValue;
+                });
+              },
+              isDense: false,
+              isExpanded: false,
+              items: <String>[
+                "Day View",
+                "Month View",
+                "Quarter View",
+                "Year View"
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Container(
+                    width: 100,
+                    height: 30,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(value, style: TextStyle(color: Colors.orange))
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
-            onChanged: (String newValue) {
-              switch (newValue) {
-                case "Day View":
-                  {
-                    Navigator.of(context).pushReplacementNamed("/homepage");
-                  }
-                  break;
-                case "Month View":
-                  {
-                    Navigator.of(context).pushReplacementNamed("/monthView");
-                  }
-                  break;
-
-                case "Quarter View":
-                  {
-                    Navigator.of(context).pushReplacementNamed("/quarterView");
-                  }
-                  break;
-
-                case "Year View":
-                  {
-                    Navigator.of(context).pushReplacementNamed("/yearView");
-                  }
-                  break;
-              }
-              setState(() {
-                isSelect = newValue;
-              });
-            },
-            items: <String>[
-              "Day View",
-              "Month View",
-              "Quarter View",
-              "Year View"
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(value, style: TextStyle(color: Colors.orange))
-                  ],
-                ),
-              );
-            }).toList(),
           ),
+        ],
+      ),
           Row(
             children: <Widget>[
               Expanded(flex: 1, child: myTopLeft()),

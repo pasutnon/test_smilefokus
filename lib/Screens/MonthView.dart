@@ -165,120 +165,140 @@ class _MonthViewState extends State<MonthView> {
   }
 
   ListView myListView() {
-    return ListView(
-        shrinkWrap: true,
-        padding: EdgeInsets.all(0),
+    return ListView(shrinkWrap: true, padding: EdgeInsets.all(0), children: <
+        Widget>[
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          DropdownButton<String>(
-            hint: Text('Month View'),
-            isExpanded: true,
-            value: isSelect,
-            elevation: 8,
-            style: TextStyle(
-              fontSize: 16,
+          Container(
+            margin: EdgeInsets.all(8.0),
+            width: 156,
+            height: 30,
+            decoration: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                    width: 1.0, style: BorderStyle.solid, color: Colors.orange),
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+              ),
             ),
-            underline: Container(
-              height: 20,
+            child: DropdownButton<String>(
+              hint: Text('Month View'),
+              value: isSelect,
+              style: TextStyle(
+                fontSize: 16,
+              ),
+              underline: Container(
+                height: 0,
+              ),
+              onChanged: (String newValue) {
+                switch (newValue) {
+                  case "Day View":
+                    {
+                      Navigator.of(context).pushReplacementNamed("/homepage");
+                    }
+                    break;
+                  case "Month View":
+                    {
+                      Navigator.of(context).pushReplacementNamed("/monthView");
+                    }
+                    break;
+
+                  case "Quarter View":
+                    {
+                      Navigator.of(context)
+                          .pushReplacementNamed("/quarterView");
+                    }
+                    break;
+
+                  case "Year View":
+                    {
+                      Navigator.of(context).pushReplacementNamed("/yearView");
+                    }
+                    break;
+                }
+                setState(() {
+                  isSelect = newValue;
+                });
+              },
+              isDense: false,
+              isExpanded: false,
+              items: <String>[
+                "Day View",
+                "Month View",
+                "Quarter View",
+                "Year View"
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Container(
+                    width: 100,
+                    height: 30,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(value, style: TextStyle(color: Colors.orange))
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
-            onChanged: (String newValue) {
-              switch (newValue) {
-                case "Day View":
-                  {
-                    Navigator.of(context).pushReplacementNamed("/homepage");
-                  }
-                  break;
-                case "Month View":
-                  {
-                    Navigator.of(context).pushReplacementNamed("/monthView");
-                  }
-                  break;
-
-                case "Quarter View":
-                  {
-                    Navigator.of(context).pushReplacementNamed("/quarterView");
-                  }
-                  break;
-
-                case "Year View":
-                  {
-                    Navigator.of(context).pushReplacementNamed("/yearView");
-                  }
-                  break;
-              }
-              setState(() {
-                isSelect = newValue;
-              });
-            },
-            items: <String>[
-              "Day View",
-              "Month View",
-              "Quarter View",
-              "Year View"
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(value, style: TextStyle(color: Colors.orange))
-                  ],
-                ),
-              );
-            }).toList(),
           ),
-          Row(
-            children: <Widget>[
-              Expanded(flex: 1, child: myTopLeft()),
-              Expanded(flex: 2, child: myTopRight()),
-            ],
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: DataTable(columns: [
-              DataColumn(
-                  numeric: true,
-                  label: Text(
-                    "Name",
-                    style: TextStyle(fontSize: 16, color: Colors.black),
-                  )),
-              DataColumn(
-                  numeric: true,
-                  label: Text("ID",
-                      style: TextStyle(fontSize: 16, color: Colors.black))),
-              DataColumn(
-                  numeric: true,
-                  label: Text("Tier",
-                      style: TextStyle(fontSize: 16, color: Colors.black))),
-              DataColumn(
-                  numeric: true,
-                  label: Text("LTV",
-                      style: TextStyle(fontSize: 16, color: Colors.black))),
-              DataColumn(
-                  numeric: true,
-                  label: Text("Total Trans.",
-                      style: TextStyle(fontSize: 16, color: Colors.black))),
-              DataColumn(
-                  numeric: true,
-                  label: Text("Total Point",
-                      style: TextStyle(fontSize: 16, color: Colors.black))),
-              DataColumn(
-                  numeric: true,
-                  label: Text("Remaining Point",
-                      style: TextStyle(fontSize: 16, color: Colors.black))),
-            ], rows: [
-              for (var i = 0; i < listCustomer.customerName.length; i++)
-                DataRow(cells: [
-                  DataCell(Text(listCustomer.customerName[i])),
-                  DataCell(Text(listCustomer.customerphone[i])),
-                  DataCell(Text(listCustomer.customertier[i])),
-                  DataCell(Text(listCustomer.customerAmount[i].toString())),
-                  DataCell(Text(listCustomer.totaltransaction[i].toString())),
-                  DataCell(Text(listCustomer.totalreward[i].toString())),
-                  DataCell(Text(listCustomer.remainingpoint[i].toString()))
-                ])
-            ]),
-          ),
-        ]);
+        ],
+      ),
+      Row(
+        children: <Widget>[
+          Expanded(flex: 1, child: myTopLeft()),
+          Expanded(flex: 2, child: myTopRight()),
+        ],
+      ),
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: DataTable(columns: [
+          DataColumn(
+              numeric: true,
+              label: Text(
+                "Name",
+                style: TextStyle(fontSize: 16, color: Colors.black),
+              )),
+          DataColumn(
+              numeric: true,
+              label: Text("ID",
+                  style: TextStyle(fontSize: 16, color: Colors.black))),
+          DataColumn(
+              numeric: true,
+              label: Text("Tier",
+                  style: TextStyle(fontSize: 16, color: Colors.black))),
+          DataColumn(
+              numeric: true,
+              label: Text("LTV",
+                  style: TextStyle(fontSize: 16, color: Colors.black))),
+          DataColumn(
+              numeric: true,
+              label: Text("Total Trans.",
+                  style: TextStyle(fontSize: 16, color: Colors.black))),
+          DataColumn(
+              numeric: true,
+              label: Text("Total Point",
+                  style: TextStyle(fontSize: 16, color: Colors.black))),
+          DataColumn(
+              numeric: true,
+              label: Text("Remaining Point",
+                  style: TextStyle(fontSize: 16, color: Colors.black))),
+        ], rows: [
+          for (var i = 0; i < listCustomer.customerName.length; i++)
+            DataRow(cells: [
+              DataCell(Text(listCustomer.customerName[i])),
+              DataCell(Text(listCustomer.customerphone[i])),
+              DataCell(Text(listCustomer.customertier[i])),
+              DataCell(Text(listCustomer.customerAmount[i].toString())),
+              DataCell(Text(listCustomer.totaltransaction[i].toString())),
+              DataCell(Text(listCustomer.totalreward[i].toString())),
+              DataCell(Text(listCustomer.remainingpoint[i].toString()))
+            ])
+        ]),
+      ),
+    ]);
   }
 
   @override
