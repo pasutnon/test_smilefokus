@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_smile/Screens/BeforeHomePage.dart';
 import 'Screens/Home.dart';
 
 void main() {
@@ -12,9 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: Home(
-        index: 0,
-      ),
+      home: BeforeHomePage(),
       routes: <String, WidgetBuilder>{
         '/homepage': (BuildContext context) => new Home(index: 0),
         '/monthView': (BuildContext context) => new Home(index: 1),

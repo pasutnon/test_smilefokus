@@ -62,9 +62,6 @@ class _MonthViewState extends State<MonthView> {
       for (var i = 0; i < listCustomer.remainingpoint.length; i++) {
         sumRemaining += listCustomer.remainingpoint[i];
       }
-      print(sumTotalReward);
-      print(sumLTV);
-      print(sumTransaction);
       listCustomer.customerName.add("Total");
       listCustomer.customerAmount.add(listCustomer.sumAmount);
       listCustomer.customerphone.add(" ");
@@ -184,7 +181,6 @@ class _MonthViewState extends State<MonthView> {
               height: 20,
             ),
             onChanged: (String newValue) {
-              print(newValue);
               switch (newValue) {
                 case "Day View":
                   {
